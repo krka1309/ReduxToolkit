@@ -1,22 +1,20 @@
 import React from 'react'
 import { useEffect,useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
-import { App, Table } from 'antd'
-import { connect, useDispatch, useSelector } from 'react-redux'
+import { Table } from 'antd'
+import { connect } from 'react-redux'
 import { setSelectedId } from '../container/redux/actions/iDActions'
-import store from '../container/redux/store'
+import "../App.css"
 
 const EmployeeList = (props) => {
   const [data, setData] = useState([]);
-  
-  
-  useEffect(() => {
+     let navigate=useNavigate();
+       useEffect(() => {
     fetchRecords()
-  }, [])
+      }, [])
   const handleClick=(record)=>{
-  // alert(record.id);
- 
+  navigate("/EmployeeDetails");
   props.setSelectedId(record.id);
 }
 const fetchRecords = () => {
@@ -50,26 +48,26 @@ const fetchRecords = () => {
     render:address=>{
       return address.city
     }
-  }
+  },
+  {
+    title: 'Website',
+    dataIndex: 'website'
+  },
+  {
+    title: 'Phone-No',
+    dataIndex: 'phone'
+  }, 
   ]
   
- 
   return (
-    <div>
-   <h1>
-      Employee List
-      </h1>
-      
-      <Table className='TableClass'
+    <div id='Customer2'>
+   <h1>Employee List</h1>
+      <Table className='TableClass' id='Customer1'
         style={{ whiteSpace: 'pre' }}
         dataSource={data}
         columns={columns}
         key={columns}>
       </Table>
-      {/* <div onClick={handleClick}>
-             {columns.name} */}
-       {/* </div> */}
-       
       </div>
   )
 }

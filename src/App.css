@@ -43,5 +43,29 @@
 }
 .ant-table-tbody > tr.ant-table-row:hover > td,
 .ant-table-tbody > tr > td.ant-table-cell-row-hover {
-  background-color: aqua
+  
+}
+.TableClass{
+  
+  
+}
+#Customer {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: lightgrey;
+}
+#Customer1{
+  background-color: lightgrey;
+}
+#Customer2{
+  background-color: lightsalmon;
+}
+#Employee{
+  background-color: #61dafb;
+  margin-top: 5cm;
+  margin-left: 12cm;
+  margin-right: 12cm;
+}
+h2{
+  text-align: center;
+  margin-top: 5cm;
 }

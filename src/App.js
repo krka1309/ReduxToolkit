@@ -1,27 +1,11 @@
-import './App.css';
+
 import 'antd/dist/reset.css';
-import {  Route,Routes,useNavigate } from 'react-router-dom';
-import Employee from './components/EmployeeList';
-import {Button} from 'react-bootstrap';
+import {  Route,Routes } from 'react-router-dom';
 import Home from './components/Home';
 import EmployeeList from './components/EmployeeList';
-import {connect} from 'react-redux'
-import { PureComponent } from 'react';
-import { setSelectedId } from './container/redux/actions/iDActions';
 import EmployeeDetails from './components/EmployeeDetails';
 
 function App () { 
-  
-const navigate=useNavigate();
-
-const navigateToEmployee=()=>{
-  <EmployeeList/>
-  navigate('/EmployeeList')
-}
-const navigateHome = () => {
-  navigate('/');
-};
-
   return (
     <div className="App">
       
@@ -29,13 +13,12 @@ const navigateHome = () => {
       <Button className="buttonclick"onClick={navigateToEmployee}></Button>
        */}
        <Routes>
-        <Route path="/EmployeeList" element={<EmployeeList/>}/>
+        <Route path="/EmployeeList" element={<EmployeeList />}/>
         <Route path="/" element={<Home/>}/>
-        
+        <Route path="/EmployeeDetails" element={<EmployeeDetails />}/>
        </Routes>
-       <EmployeeDetails/>
+  
     </div>
   );
 }
-
 export default App;

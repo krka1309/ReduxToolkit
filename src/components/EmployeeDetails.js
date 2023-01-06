@@ -1,14 +1,52 @@
-import React from 'react'
-
-import { useParams } from 'react-router-dom'
-import App from '../App'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+import axios from 'axios';
+import { useEffect } from 'react';
+import {Table} from 'react-bootstrap'
+import "../App.css"
 const EmployeeDetails = () => {
-  const{setSelectedId}=useParams(); 
+  
+  const [post,setPost]=useState("");
+  const emp = useSelector(state => state);
+  const fetchDetails = (empid) => {
+    return axios.get(`https://jsonplaceholder.typicode.com/users/${empid}`).then((response) => 
+      setPost(response.data))
+  }
+  useEffect(() => {
+      fetchDetails(emp.allId.id);
+  }, [])
+  console.log(emp.allId.id)
   return (
     <div>
-      
+   <Table id='Customer'> 
+      {/* <h3>Name:{post.name}</h3>
+      <h3>Username:{post.username}</h3>
+      <h3>Email:{post.email}</h3> */}
+      <thead>
+        <tr>
+          
+          <th>Id</th>
+          <th> Name</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Website</th>
+
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+          <td>{post.id}</td>
+          <td>{post.name}</td>
+          <td>{post.username}</td>
+          <td>{post.email}</td>
+          {/* <th>{post.address}</th> */}
+          <th>{post.phone}</th>
+          <th>{post.website}</th>
+        </tr>
+      </tbody>
+    </Table> 
     </div>
   )
-}
-
-export default EmployeeDetails
+  }
+export default EmployeeDetails;
