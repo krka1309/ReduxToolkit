@@ -1,24 +1,33 @@
 import React from 'react'
-import { useEffect,useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { Table } from 'antd'
-import { connect } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { setSelectedId } from '../container/redux/actions/iDActions'
 import "../App.css"
+import Edit from './Edit'
+import { Button } from 'react-bootstrap'
+
+import EmployeeDetails from './EmployeeDetails'
 
 const EmployeeList = (props) => {
   const [data, setData] = useState([]);
-     let navigate=useNavigate();
-       useEffect(() => {
-    fetchRecords()
-      }, [])
-  const handleClick=(record)=>{
-  navigate("/EmployeeDetails");
-  props.setSelectedId(record.id);
-}
-const fetchRecords = () => {
-    return axios.get("https://jsonplaceholder.typicode.com/users").then((response)=>setData(response.data))
+  const loading = useSelector(state => state.loading);
+  const error = useSelector(state => state.error);
+  let navigate = useNavigate();
+let dispatch=useDispatch();
+  useEffect(() => {
+    (fetchRecords());
+  }, [])
+
+  const handleClick = (record) => {
+    navigate("/EmployeeDetails");
+    props.setSelectedId(record.id);
+    <Button >Edit</Button>
+  }
+  const fetchRecords = () => {
+    return axios.get(url).then((response) => setData(response.data))
   }
   const columns = [{
     title: 'Id',
@@ -29,8 +38,8 @@ const fetchRecords = () => {
     title: 'Name',
     dataIndex: 'name',
     key: 'key',
-    render: (name,record) => {
-      return <a style={{ color: 'blue' }} value={record} onClick={()=>handleClick(record)}>{name}</a>
+    render: (name, record) => {
+      return <a style={{ color: 'blue' }} key={record} value={record} onClick={() => handleClick(record)}>{name}</a>
     }
   },
   {
@@ -40,12 +49,12 @@ const fetchRecords = () => {
   }, {
     title: 'Email',
     dataIndex: 'email'
-  }, 
+  },
   {
     title: 'Address',
     dataIndex: 'address',
     key: "Id",
-    render:address=>{
+    render: address => {
       return address.city
     }
   },
@@ -56,30 +65,36 @@ const fetchRecords = () => {
   {
     title: 'Phone-No',
     dataIndex: 'phone'
-  }, 
+  },
+
+
   ]
-  
+
   return (
     <div id='Customer2'>
-   <h1>Employee List</h1>
+      <h1>Employee List</h1>
       <Table className='TableClass' id='Customer1'
         style={{ whiteSpace: 'pre' }}
         dataSource={data}
         columns={columns}
-        key={columns}>
+        key={columns.name}
+      >
       </Table>
-      </div>
+
+    </div>
   )
 }
 const mapStateToProps = (state) => ({
   id: state.id,
 });
+export const url = "https://jsonplaceholder.typicode.com/users";
 
 const mapDispatchToProps = (dispatch) => ({
   setSelectedId: (data) => dispatch(setSelectedId(data)),
-  
+
 });
 
-export default connect(mapStateToProps,mapDispatchToProps)(EmployeeList);
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeeList);
+
 
 
