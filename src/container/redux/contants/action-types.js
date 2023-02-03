@@ -1,3 +1,13 @@
  
-  export const  SET_SELECTED_ID = "SET_SELECTED_ID";  
+  export const  SET_SELECTED_ID = "SET_SELECTED_ID";
+
+  export const  GET_EMPLOYEE_LIST = "GET_EMPLOYEE_LIST";
+  
+  // export const  SET_EMPLOYEE_LIST =  "SET_EMPLOYEE_LIST";
+
+  export const  FILTER_STATE_EMPLOYEE = "FILTER_STATE_EMPLOYEE";
+
+  export const   SEARCH_EMPLOYEE_SUCCESS= "SEARCH_EMPLOYEE_SUCCESS";
+
+  
 
